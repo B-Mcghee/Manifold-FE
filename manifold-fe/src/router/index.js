@@ -13,7 +13,7 @@ const routes = [
   {
     path:"/meteorites",
     name: "Meteorite",
-    component: () => import(/* webpackChunkName: "Meteorite" */'../views/Meteorite.vue')
+    component: () => import(/* webpackChunkName: "Meteorite" */'../views/Meteorite/Meteorite.vue')
   },
 
   // {
