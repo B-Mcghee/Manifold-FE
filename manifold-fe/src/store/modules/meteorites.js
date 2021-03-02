@@ -18,7 +18,8 @@ const mutations = {
   ADD_FAVORITE: (state, payload) => {
     state.favoriteMeteorites = payload
     window.localStorage.favoriteMeteorites = JSON.stringify(payload);},
-  SET_FAVORITES: (state, payload) => {state.favoriteMeteorites = payload}
+  SET_FAVORITES: (state, payload) => {state.favoriteMeteorites = payload},
+  SET_COMPARISON: (state, payload) => (state.meteoriteComparison = payload)
 };
 
 
@@ -76,6 +77,18 @@ const actions = {
   async syncFavorites({commit}, payload){
     let favorites = JSON.parse(payload);
     commit('SET_FAVORITES',favorites);
+  },
+  async addComparison({commit}, payload){
+    if(!state.meteoriteComparison.includes(payload)){
+      const meteorites = state.meteoriteComparison;
+      meteorites.push(payload);
+      commit('SET_COMPARISON', meteorites);
+    }
+  },
+  async removeComparison({commit}, payload){
+    let meteorites = state.meteoriteComparison;
+    meteorites.splice(meteorites.indexOf(payload), 1);
+    commit('SET_COMPARISON', meteorites);
   }
 };
 

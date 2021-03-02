@@ -1,10 +1,21 @@
 <template>
   <div>
-    <base-card class="mx-auto my-2">
+    <base-card class="mx-auto my-2" data-testid="base-card">
       <template v-slot:header>
-        <v-toolbar-title>{{ meteorite.name }}</v-toolbar-title>
+        <v-tooltip v-if="meteorite.name.length > 13" top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-toolbar-title v-bind="attrs" v-on="on" data-testid="toolbar">{{
+              meteorite.name | formatName
+            }}</v-toolbar-title>
+          </template>
+          <span>{{ meteorite.name }}</span>
+        </v-tooltip>
+        <v-toolbar-title v-else>{{
+          meteorite.name | formatName
+        }}</v-toolbar-title>
+
         <v-spacer></v-spacer>
-        <h3>ID: {{ meteorite.id }}</h3>
+        <h3 class="text-h6">ID: {{ meteorite.id }}</h3>
       </template>
       <template v-slot:body>
         <v-container>
@@ -81,96 +92,27 @@
             >
           </v-flex>
 
-          <v-flex xs6 class="mt-1 mx-auto">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn width="100%" v-bind="attrs" v-on="on">
-                  <favorite-icon
-                    @toggleFavorite="toggleFavorite"
-                    :favorite="JSON.parse(meteorite.id)"
-                  ></favorite-icon>
-                </v-btn>
-              </template>
-              <span>Favorite</span>
-            </v-tooltip>
+          <v-flex xs6 class="mt-1 mx-auto ">
+            <favorite-icon
+              :favorite="JSON.parse(meteorite.id)"
+              ref="icon"
+            ></favorite-icon>
           </v-flex>
           <v-flex xs6 class="mt-1">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn width="100%" v-bind="attrs" v-on="on">
-                  <compare-icon></compare-icon>
-                </v-btn>
-              </template>
-              <span>Compare Meteorites</span>
-            </v-tooltip>
+            <compare-icon :meteorite="JSON.parse(meteorite.id)"></compare-icon>
           </v-flex>
         </v-layout>
       </template>
     </base-card>
-
-    <!-- <v-card
-      raised
-      color="deep-grey accent-2"
-      elevation="4"
-      class=" card mx-auto rounded-lg my-10"
-      outlined
-      max-width="250"
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <div class="overline mb-3">id: {{ meteorite.id }}</div>
-          <v-card-title class="headline mb-1">{{
-            meteorite.name
-          }}</v-card-title>
-          <v-list-item-content class="my-2"
-            >Mass: {{ meteorite.mass }} (g)</v-list-item-content
-          >
-          <v-list-item-subtitle
-            >Geolocation: {{ meteorite | formatLocation }}</v-list-item-subtitle
-          >
-          <v-list-item-subtitle
-            >Name Type: {{ meteorite.nametype }}</v-list-item-subtitle
-          >
-          <v-list-item-subtitle
-            >Fall: {{ meteorite.fall }}</v-list-item-subtitle
-          >
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider class="grey darken-6 my-3"></v-divider>
-      <v-card-actions>
-        <div class="d-flex flex-wrap">
-          <v-btn x-small rounded outlined text class=" mx-1 my-1">
-            <router-link
-              :to="{
-                name: 'Recclass',
-                params: { recclass: meteorite.recclass },
-              }"
-              >Recclass: {{ meteorite.recclass }}</router-link
-            >
-          </v-btn>
-          <v-btn x-small rounded outlined text class=" mx-1 my-1"
-            ><router-link
-              :to="{
-                name: 'Year',
-                params: { year: meteorite.year },
-              }"
-              >Year: {{ meteorite.year | formatDate }}</router-link
-            ></v-btn
-          >
-          <button><favorite></favorite></button>
-        </div>
-      </v-card-actions>
-    </v-card> -->
   </div>
 </template>
 
 <script>
 import CompareIcon from "@/components/UI/CompareIcon.vue";
 import FavoriteIcon from "@/components/UI/FavoriteIcon.vue";
-
-// import Favorite from "./UI/Favorite";
+import BaseCard from "@/components/UI/BaseCard.vue";
 export default {
-  components: { FavoriteIcon, CompareIcon },
+  components: { FavoriteIcon, CompareIcon, BaseCard },
   props: {
     meteorite: Object,
   },
@@ -182,13 +124,7 @@ export default {
       console.log(recclass);
       this.$emit("resort", recclass);
     },
-    toggleFavorite() {
-      // console.log(payload);
-      // console.log("bre");
-      // // let id = JSON.parse(meteorite.id);
-      // // const payload = id;
-      // this.$store.dispatch("addToFavorites", payload);
-    },
+    toggle() {},
   },
 
   filters: {
@@ -200,6 +136,12 @@ export default {
       } else {
         return "N/A";
       }
+    },
+    formatName: function(value) {
+      if (value.length > 15) {
+        return value.substring(0, 15);
+      }
+      return value;
     },
     formatLocation: function(values) {
       if (values) {
@@ -219,4 +161,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a {
+  text-decoration: none;
+}
+</style>

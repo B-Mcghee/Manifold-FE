@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <navigation class="width"></navigation>
-    <v-main class="mt-16">
+    <v-main class=" mt-10">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -29,3 +29,4 @@ export default {
   },
 };
 </script>
+<style></style>

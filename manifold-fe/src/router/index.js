@@ -15,6 +15,26 @@ const routes = [
     name: "Meteorite",
     component: () => import(/* webpackChunkName: "Meteorite" */'../views/Meteorite/Meteorite.vue')
   },
+  {
+    path:"/favorites",
+    name: "Favorite",
+    component: () => import('../components/layouts/FavoriteList.vue')
+  },
+  {
+    path:"/comparison",
+    name: "Compare",
+    component: () => import('../components/layouts/CompareList.vue')
+  },
+  {
+    path: "/recclass/:recclass",
+    name: "Recclass",
+    component: () => import('../components/layouts/Recclass.vue'),
+  },
+  {
+    path: "/year/:year?",
+    name: "Year",
+    component: () => import('../components/layouts/Year.vue'),
+  },
 
   // {
   //   path: "/about",

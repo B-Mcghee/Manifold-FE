@@ -6,7 +6,7 @@
     <div class="grey--text text--darken-5 my-4">
       <slot name="body"></slot>
     </div>
-    <v-footer class="white--text blue-grey lighten-5">
+    <v-footer class="white--text blue-grey lighten-5 pb-3">
       <slot name="footer"></slot>
     </v-footer>
   </v-card>
@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: "base-card",
   components: {},
 };
 </script>

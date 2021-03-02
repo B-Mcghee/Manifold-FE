@@ -1,84 +1,104 @@
 <template>
-  <v-data-iterator
-    :items="meteorites"
-    :items-per-page.sync="itemsPerPage"
-    :page.sync="page"
-    :search="search"
-    :sort-by="sortBy.toLowerCase()"
-    :sort-desc="sortDesc"
-    hide-default-footer
-    class="relative"
-  >
-    <!-- <template v-slot:header></template> -->
-    <template v-slot:header>
-      <v-toolbar dark color="#1b579e" class="mb-1 fixed" height="50px">
-        <v-text-field
-          v-model="search"
-          clearable
-          flat
-          solo-inverted
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          label="Search"
-          class="mr-3 fixed"
-          fixed
+  <div>
+    <v-data-iterator
+      :items="meteorites"
+      :items-per-page.sync="itemsPerPage"
+      :page.sync="page"
+      :search="search"
+      :sort-by="sortBy.toLowerCase()"
+      :sort-desc="sortDesc"
+      hide-default-footer
+      class="relative"
+    >
+      <!-- <template v-slot:header></template> -->
+      <template v-slot:header>
+        <v-toolbar
+          dark
+          color="darkPrimary"
+          class="mb-1 fixed"
+          height="52px"
+          ref="listContainer"
         >
-        </v-text-field>
-        <template v-if="$vuetify.breakpoint.smAndUp">
-          <v-select
-            v-model="sortBy"
+          <v-text-field
+            v-model="search"
+            clearable
             flat
+            dense
             solo-inverted
             hide-details
-            :items="keys"
             prepend-inner-icon="mdi-magnify"
-            label="Sort by"
+            label="Search"
+            placeholder="Search"
+            class="mr-3 fixed"
+            fixed
           >
-          </v-select>
-          <v-spacer></v-spacer>
-          <v-btn-toggle v-model="sortDesc" mandatory>
-            <v-btn large depressed color="#1b579e" :value="true">
-              <v-icon>mdi-arrow-up</v-icon>
-            </v-btn>
-            <v-btn large depressed color="#1b579e" :value="false">
-              <v-icon>mdi-arrow-down</v-icon></v-btn
+          </v-text-field>
+          <template v-if="$vuetify.breakpoint.smAndUp">
+            <v-select
+              v-model="sortBy"
+              flat
+              solo-inverted
+              dense
+              hide-details
+              :items="keys"
+              prepend-inner-icon="mdi-magnify"
+              label="Sort by"
             >
-          </v-btn-toggle>
-        </template>
-      </v-toolbar>
-    </template>
+            </v-select>
+            <v-spacer></v-spacer>
+            <v-btn-toggle v-model="sortDesc" mandatory class="ml-3" shaped>
+              <v-btn dense color="focus" :value="true">
+                <v-icon color="white">mdi-arrow-down</v-icon></v-btn
+              >
+              <v-btn depressed color="focus" :value="false">
+                <v-icon color="white">mdi-arrow-up</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </template>
+        </v-toolbar>
+      </template>
 
-    <template v-slot:default="props">
-      <div class="overflow">
-        <v-row>
-          <v-col
-            align-center
-            v-for="item in props.items"
-            :key="item.id"
-            cols="12"
-            sm="6"
-            md="3"
-            lg="3"
-          >
-            <meteorite-list-item :meteorite="item"></meteorite-list-item>
-          </v-col>
-        </v-row>
-      </div>
-    </template>
-
-    <template v-slot:footer>
+      <template v-slot:default="props">
+        <div
+          :style="{
+            maxHeight: ` ${height}px`,
+            overflow: 'scroll',
+          }"
+        >
+          <v-row>
+            <v-col
+              align-center
+              v-for="item in props.items"
+              :key="item.id"
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+            >
+              <meteorite-list-item :meteorite="item"></meteorite-list-item>
+            </v-col>
+          </v-row>
+        </div>
+      </template>
+    </v-data-iterator>
+    <v-card class="darkPrimary bottom-0" absolute bottom width="100%">
+      <!-- <v-footer height="100px" color="darkPrimary">
+        <v-card class="white--text font-weight-medium"
+          ><v-card-title>Items per page</v-card-title></v-card
+        >
+      </v-footer> -->
       <v-row
-        class="mt-2 footer blue--text text--darken-2 blue-grey lighten-5"
+        class="mt-2 footer white--text darkPrimary "
         align="center"
         justify="center"
       >
-        <span class="">Items per page</span>
+        <span class="font-weight-bold ">Items per page</span>
         <v-menu offset-y v-model="showCaret">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               dark
               text
-              color="primary"
+              color="white "
               class="ml-4"
               v-bind="attrs"
               v-on="on"
@@ -102,42 +122,40 @@
 
         <span
           class="mr-3
-            grey--text"
+            white--text font-weight-medium "
         >
           Page {{ page }} of {{ numberOfPages }}
         </span>
         <v-btn
           fab
           dark
-          color="blue darken-3"
-          class="mr-3"
+          color="white"
           height="2em"
           width="2em"
           @click="formerPage"
         >
-          <v-icon>mdi-chevron-left</v-icon>
+          <v-icon color="primary">mdi-chevron-left</v-icon>
         </v-btn>
         <v-btn
           fab
           dark
-          color="blue darken-3"
+          color="white"
           class=" mr-2"
           height="2em"
           width="2em"
           @click="nextPage"
         >
-          <v-icon>mdi-chevron-right</v-icon>
+          <v-icon color="primary">mdi-chevron-right</v-icon>
         </v-btn>
       </v-row>
-    </template>
-  </v-data-iterator>
+    </v-card>
+  </div>
 </template>
 
 <script>
 // import MeteoriteListItem from "../components/MeteoriteListItem.vue";
-import MeteoriteListItem from "./MeteoriteListItem.vue";
+
 export default {
-  components: { MeteoriteListItem },
   data() {
     return {
       showCaret: false,
@@ -152,22 +170,16 @@ export default {
       page: 1,
       itemsPerPage: 25,
       sortBy: "name",
-      keys: [
-        "id",
-        "name",
-        "nametype",
-        "recclass",
-        "mass",
-        "fall",
-        "year",
-        "reclat",
-        "reclong",
-        "geolocation",
-      ],
+      keys: ["id", "name", "recclass", "mass", "year", "reclong", "reclong"],
+      height: undefined,
     };
   },
   // components: { MeteoriteListItem },
-
+  mounted() {
+    this.$nextTick(function() {
+      this.getheight();
+    });
+  },
   created() {
     this.meteors = JSON.parse(JSON.stringify(this.meteorites));
   },
@@ -177,7 +189,7 @@ export default {
         (meteorite) => meteorite
       );
 
-      return array.slice(0, 5);
+      return array;
     },
     numberOfPages() {
       return Math.ceil(this.meteorites.length / this.itemsPerPage);
@@ -194,6 +206,14 @@ export default {
       return this.meteorites.filter((meteor) =>
         meteor.name.toLowerCase().includes(this.search1.toLowerCase())
       );
+    },
+    overflowing: function() {
+      // const height = document.body.scrollHeight;
+      // console.log(height);
+      var viewPort = 0;
+
+      console.log(viewPort);
+      return `${viewPort}px`;
     },
   },
   methods: {
@@ -213,13 +233,27 @@ export default {
         (meteor) => meteor.recclass == recclass
       );
     },
+    getheight() {
+      // const height = document.body.scrollHeight;
+      // console.log(height);
+
+      const totalHeight = window.innerHeight;
+      const heightToTop = this.$refs;
+      console.log(heightToTop);
+      this.height = totalHeight - (250 + 50);
+      console.log(this.height);
+      return this.height;
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   border: 3px solid red;
+}
+.footer {
+  margin-bottom: 30px;
 }
 fixed {
   position: fixed;
@@ -227,9 +261,8 @@ fixed {
   left: 0;
   right: 0;
 }
-
 .overflow {
-  height: 65vh;
+  height: 70vh;
   overflow: scroll;
 }
 .footer {
@@ -237,13 +270,19 @@ fixed {
 }
 @media screen and (max-width: 1024px) {
   .overflow {
-    height: 62vh;
+    height: 70vh;
     overflow: scroll;
   }
 }
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 800px) {
   .overflow {
-    height: 70vh;
+    height: 73vh;
+    overflow: scroll;
+  }
+}
+@media screen and (max-width: 500px) {
+  .overflow {
+    height: 60vh;
     overflow: scroll;
   }
 }
