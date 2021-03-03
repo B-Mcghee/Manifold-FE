@@ -24,7 +24,7 @@
 export default {
   data() {
     return {
-      year: this.$route.params.year,
+      year: this.$route.params.year
     };
   },
   computed: {
@@ -32,9 +32,9 @@ export default {
       let value = this.year;
       console.log(value);
       return this.$store.getters.initialMeteorites.filter(
-        (meteorite) => meteorite.year == value
+        meteorite => meteorite.year == value
       );
-    },
+    }
   },
   filters: {
     formatDate: function(value) {
@@ -45,8 +45,8 @@ export default {
       } else {
         return "N/A";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

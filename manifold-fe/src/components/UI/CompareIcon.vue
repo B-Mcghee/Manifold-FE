@@ -1,7 +1,12 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn width="100%" @click="compareMeteorite" v-bind="attrs" v-on="on">
+      <v-btn
+        width="100%"
+        @click.prevent="compareMeteorite"
+        v-bind="attrs"
+        v-on="on"
+      >
         <svg
           id="Layer_1"
           data-name="Layer 1"
@@ -10,9 +15,8 @@
           :height="height"
           :width="width"
         >
-          <transition name="border">
+          <transition v-if="compare" name="border">
             <rect
-              v-if="animate"
               x="1"
               y="1"
               width="161"
@@ -20,7 +24,19 @@
               stroke="#000"
               stroke-miterlimit="10"
               :stroke-width="stroke"
-              :fill="border"
+              fill="#1b579e"
+            />
+          </transition>
+          <transition v-else name="border">
+            <rect
+              x="1"
+              y="1"
+              width="161"
+              height="156.49"
+              stroke="#000"
+              stroke-miterlimit="10"
+              stroke-width="0"
+              fill="#fff"
             />
           </transition>
           <path
@@ -44,40 +60,20 @@
 
 <script>
 export default {
-  props: ["meteorite"],
+  props: {
+    compare: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     height: "2em",
     width: "2em",
-    fill: "#fff",
     stroke: 2,
-    animate: false,
   }),
   methods: {
     compareMeteorite() {
-      this.animate = !this.animate;
-
-      this.fill == "#fff" ? (this.fill = "#1b579e") : (this.fill = "#fff");
-
-      if (!this.meteorites.includes(this.meteorite)) {
-        console.log("crumbs");
-        this.$store.dispatch("addComparison", this.meteorite);
-      } else {
-        this.$store.dispatch("removeComparison", this.meteorite);
-      }
-    },
-  },
-  computed: {
-    border() {
-      const fill = this.fill;
-      return fill;
-    },
-
-    meteorites() {
-      const array = this.$store.state.meteorites.meteoriteComparison.map(
-        (e) => e
-      );
-      console.log(array);
-      return array;
+      this.$emit("compareMeteorite");
     },
   },
 };

@@ -11,40 +11,28 @@ const routes = [
     component: Home
   },
   {
-    path:"/meteorites",
+    path: "/meteorites",
     name: "Meteorite",
-    component: () => import(/* webpackChunkName: "Meteorite" */'../views/Meteorite/Meteorite.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "Meteorite" */ "../views/Meteorite/Meteorite.vue"
+      ),
+      // children: [
+      //   {path: '/category/:category', component: () => import("@/views/Meteorite/MeteoriteList.vue") }
+      // ]
   },
   {
-    path:"/favorites",
-    name: "Favorite",
-    component: () => import('../components/layouts/FavoriteList.vue')
-  },
-  {
-    path:"/comparison",
-    name: "Compare",
-    component: () => import('../components/layouts/CompareList.vue')
-  },
-  {
-    path: "/recclass/:recclass",
-    name: "Recclass",
-    component: () => import('../components/layouts/Recclass.vue'),
-  },
-  {
-    path: "/year/:year?",
-    name: "Year",
-    component: () => import('../components/layouts/Year.vue'),
+    path: "/meteorites/category/:category",
+    name: "Category",
+    component: () => import("@/views/Meteorite/Meteorite.vue")
   },
 
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue")
-  // }
+  {
+    path: "/meteorites/properties/:property/value/:value",
+    name: "Property",
+    component: () => import("@/views/Meteorite/Meteorite.vue")
+  },
+
 ];
 
 const router = new VueRouter({

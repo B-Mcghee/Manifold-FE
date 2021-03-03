@@ -9,7 +9,19 @@
       <v-spacer></v-spacer>
 
       <div>
-        <template $vuetify.breakpoint.smAndUp>
+        <template v-if="isMobile">
+          <v-btn
+            icon
+            x-small
+            v-for="(tab, i) in tabs"
+            :key="i"
+            :to="{ name: tab.name, params: { category: tab.tabName } }"
+            :value="tab.name"
+            class="mx-2"
+            ><v-icon color="white" v-text="tab.icon" size="20"></v-icon
+          ></v-btn>
+        </template>
+        <template v-else>
           <v-tabs
             height="100%"
             v-model="tab"
@@ -21,7 +33,7 @@
             <v-tab
               v-for="(tab, i) in tabs"
               :key="i"
-              :to="{ name: tab.name }"
+              :to="{ name: tab.name, params: { category: tab.tabName } }"
               :value="tab.name"
               href="`${tab.name}`"
               class="white--text mb-1"
@@ -29,18 +41,6 @@
               }}<v-icon size="30" v-text="tab.icon" color="white"></v-icon
             ></v-tab>
           </v-tabs>
-        </template>
-        <template class="d-">
-          <v-btn
-            icon
-            x-small
-            v-for="(tab, i) in tabs"
-            :key="i"
-            :to="{ name: tab.name }"
-            :value="tab.name"
-            class="mx-2"
-            ><v-icon color="white" v-text="tab.icon" size="20"></v-icon
-          ></v-btn>
         </template>
       </div>
     </v-toolbar>
@@ -58,18 +58,36 @@ export default {
         tabName: "Meteorites",
       },
       {
-        name: "Favorite",
+        name: "Category",
         icon: "mdi-star-shooting-outline",
         tabName: "Favorites",
       },
       {
-        name: "Compare",
+        name: "Category",
         icon: "mdi-scale-balance",
         tabName: "Compare",
       },
     ],
+    isMobile: false,
   }),
-  mounted() {},
+
+  beforeDestroy() {
+    if (typeof window === "undefined") return;
+
+    window.removeEventListener("resize", this.onResize, { passive: true });
+  },
+
+  mounted() {
+    this.onResize();
+
+    window.addEventListener("resize", this.onResize, { passive: true });
+  },
+
+  methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 600;
+    },
+  },
 };
 </script>
 

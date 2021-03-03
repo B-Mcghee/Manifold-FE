@@ -25,7 +25,7 @@
 export default {
   data() {
     return {
-      recclass: this.$route.params.recclass,
+      recclass: this.$route.params.recclass
     };
   },
   computed: {
@@ -33,10 +33,10 @@ export default {
       let value = this.recclass;
       console.log(value);
       return this.$store.getters.initialMeteorites.filter(
-        (meteorite) => meteorite.recclass == value
+        meteorite => meteorite.recclass == value
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

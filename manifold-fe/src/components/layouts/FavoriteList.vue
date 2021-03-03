@@ -22,20 +22,20 @@
 export default {
   computed: {
     meteoriteIds: function() {
-      return this.$store.state.meteorites.favoriteMeteorites.map((m) => m);
+      return this.$store.state.meteorites.favoriteMeteorites.map(m => m);
     },
     favoriteMeteorites() {
       const array = this.$store.state.meteorites.meteorites.filter(
-        (meteorite) => {
-          if (this.meteoriteIds.find((e) => e == meteorite.id)) {
+        meteorite => {
+          if (this.meteoriteIds.find(e => e == meteorite.id)) {
             return true;
           }
         }
       );
       console.log(array);
       return array;
-    },
-  },
+    }
+  }
 };
 </script>
 

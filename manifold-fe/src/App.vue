@@ -15,18 +15,18 @@ export default {
   name: "App",
 
   components: {
-    Navigation,
+    Navigation
   },
   methods: {
-    ...mapActions(["fetchMeteorites", "loadFavorites"]),
+    ...mapActions(["fetchMeteorites", "loadFavorites"])
   },
   computed: {
-    ...mapGetters(["initialMeteorites"]),
+    ...mapGetters(["initialMeteorites"])
   },
   created() {
     this.fetchMeteorites();
     this.loadFavorites();
-  },
+  }
 };
 </script>
 <style></style>

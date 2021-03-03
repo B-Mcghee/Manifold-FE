@@ -62,15 +62,16 @@
               text
               width="100%"
               height="48px"
-              class="text-subtitle-1"
+              class="text-subtitle-1 darkPrimary--text"
+              :to="{
+                name: 'Property',
+                params: {
+                  property: 'recclass',
+                  value: meteorite.recclass,
+                },
+              }"
             >
-              <router-link
-                :to="{
-                  name: 'Recclass',
-                  params: { recclass: meteorite.recclass },
-                }"
-                >Reclass: {{ meteorite.recclass }}</router-link
-              >
+              Reclass: {{ meteorite.recclass }}
             </v-btn>
           </v-flex>
           <v-flex xs12>
@@ -80,26 +81,28 @@
               text
               width="100%"
               height="48px"
-              class="text-subtitle-1"
-              ><router-link
-                :to="{
-                  name: 'Year',
-                  params: { year: meteorite.year },
-                }"
-              >
-                year:{{ meteorite.year | formatDate }}</router-link
-              ></v-btn
+              class="text-subtitle-1 darkPrimary--text"
+              :to="{
+                name: 'Property',
+                params: { property: 'year', value: meteorite.year },
+              }"
+            >
+              year:{{ meteorite.year | formatDate }}</v-btn
             >
           </v-flex>
 
           <v-flex xs6 class="mt-1 mx-auto ">
             <favorite-icon
-              :favorite="JSON.parse(meteorite.id)"
+              @toggleFavorite="toggleFavorite"
+              :favorite="isFavorite"
               ref="icon"
             ></favorite-icon>
           </v-flex>
           <v-flex xs6 class="mt-1">
-            <compare-icon :meteorite="JSON.parse(meteorite.id)"></compare-icon>
+            <compare-icon
+              @compareMeteorite="compareMeteorite"
+              :compare="toCompare"
+            ></compare-icon>
           </v-flex>
         </v-layout>
       </template>
@@ -111,20 +114,38 @@
 import CompareIcon from "@/components/UI/CompareIcon.vue";
 import FavoriteIcon from "@/components/UI/FavoriteIcon.vue";
 import BaseCard from "@/components/UI/BaseCard.vue";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   components: { FavoriteIcon, CompareIcon, BaseCard },
   props: {
     meteorite: Object,
   },
-  data: () => ({
-    favorite: false,
-  }),
   methods: {
-    resortChild(recclass) {
-      console.log(recclass);
-      this.$emit("resort", recclass);
+    ...mapActions([
+      "addToFavorites",
+      "removeFavorite",
+      "addComparison",
+      "removeComparison",
+    ]),
+    checkFavorite(value) {
+      return value === JSON.parse(this.meteorite.id);
     },
-    toggle() {},
+    toggleFavorite() {
+      if (!this.favorites.includes(this.cleanId)) {
+        console.log(this.addToFavorites);
+        this.addToFavorites(this.cleanId);
+      } else {
+        this.removeFavorite(this.cleanId);
+      }
+    },
+    compareMeteorite() {
+      if (!this.meteoriteComparison.includes(this.cleanId)) {
+        this.addComparison(this.cleanId);
+      } else {
+        this.removeComparison(this.cleanId);
+      }
+    },
   },
 
   filters: {
@@ -154,8 +175,17 @@ export default {
     },
   },
   computed: {
-    isFavorite: function() {
-      return "";
+    ...mapGetters(["favorites", "initialMeteorites", "meteoriteComparison"]),
+    isFavorite() {
+      const num = this.favorites.findIndex(this.checkFavorite);
+      return num !== -1 ? true : false;
+    },
+    toCompare() {
+      const num = this.meteoriteComparison.findIndex(this.checkFavorite);
+      return num !== -1 ? true : false;
+    },
+    cleanId: function() {
+      return JSON.parse(this.meteorite.id);
     },
   },
 };

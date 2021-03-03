@@ -1,7 +1,13 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn width="100%" @click="toggleFavorite" v-bind="attrs" v-on="on">
+      <v-btn
+        id="favorite-icon"
+        width="100%"
+        @click.prevent="toggleFavorite"
+        v-bind="attrs"
+        v-on="on"
+      >
         <svg
           id="Layer_1"
           data-name="Layer 1"
@@ -10,7 +16,7 @@
           :height="height"
           :width="width"
         >
-          <transition v-if="isFavorite" name="bookmark">
+          <transition v-if="favorite" name="bookmark">
             <polygon
               id="background"
               points="109.5 193.5 56.02 136.52 1.5 193.5 1.5 1.5 109.5 1.5 109.5 193.5"
@@ -24,13 +30,13 @@
             <polygon
               id="background"
               points="109.5 193.5 56.02 136.52 1.5 193.5 1.5 1.5 109.5 1.5 109.5 193.5"
-              :fill="bookmark"
+              fill="#fff"
               stroke="#000"
               stroke-miterlimit="10"
               stroke-width="3"
             />
           </transition>
-          <transition v-if="isFavorite" name="star">
+          <transition v-if="favorite" name="star">
             <polygon
               id="star"
               points="78.31 91.9 55 80.53 31.54 91.57 36.16 67.86 17.35 50.91 43.52 47.63 55.35 26.11 66.9 47.79 93.03 51.44 74 68.13 78.31 91.9"
@@ -44,7 +50,7 @@
             <polygon
               id="star"
               points="78.31 91.9 55 80.53 31.54 91.57 36.16 67.86 17.35 50.91 43.52 47.63 55.35 26.11 66.9 47.79 93.03 51.44 74 68.13 78.31 91.9"
-              :fill="star"
+              fill="#fff"
               stroke="#000"
               stroke-miterlimit="10"
               stroke-width="3"
@@ -58,49 +64,39 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 export default {
   name: "favorite-icon",
-  props: ["favorite"],
+  props: {
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     height: "2em",
     width: "2em",
     starFill: "#fff",
-    gold: "#ffd700",
     backgroundFill: "#fff",
     favoriteIds: [],
+    selected: false,
     name: "",
   }),
   methods: {
-    ...mapActions(["addToFavorites", "removeFavorite"]),
-    toggleFavorites() {
-      this.starFill == "#fff"
-        ? (this.starFill = "#f9ff00")
-        : (this.starFill = "#fff");
-      this.backgroundFill == "#fff"
-        ? (this.backgroundFill = "#1b579e")
-        : (this.backgroundFill = "#fff");
-    },
+    // toggleAnimation() {
+    //   this.starFill == "#fff"
+    //     ? (this.starFill = "#f9ff00")
+    //     : (this.starFill = "#fff");
+    //   this.backgroundFill == "#fff"
+    //     ? (this.backgroundFill = "#1b579e")
+    //     : (this.backgroundFill = "#fff");
+    // },
     toggleFavorite() {
-      if (!this.favoriteArray.includes(this.favorite)) {
-        this.toggleFavorites();
-        this.addToFavorites(this.favorite);
-      } else {
-        this.removeFavorite(this.favorite);
-        // this.$store.dispatch("removeFavorite", this.favorite);
-      }
+      console.log("crumbs");
+      this.$emit("toggleFavorite");
     },
   },
-  mounted() {
-    this.$nextTick(function() {
-      this.favoriteIds = [...this.favoriteArray];
-    });
-  },
+
   computed: {
-    ...mapState({
-      favoriteArray: (state) =>
-        state.meteorites.favoriteMeteorites.map((e) => e),
-    }),
     star() {
       const fill = this.starFill;
       return fill;
@@ -109,19 +105,6 @@ export default {
       const fill = this.backgroundFill;
       return fill;
     },
-    isFavorite() {
-      if (this.favoriteArray.includes(this.favorite)) {
-        return true;
-      }
-      return false;
-    },
-
-    // favoriteArray() {
-    //   const array = this.$store.state.meteorites.favoriteMeteorites.map(
-    //     (e) => e
-    //   );
-    //   return array;
-    // },
   },
 };
 </script>

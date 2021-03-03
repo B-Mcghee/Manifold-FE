@@ -1,27 +1,24 @@
 <template>
   <div class="relative">
-    <div
-      class="  d-flex justify-center text-h3 my-2 pb-4 font-weight-bold primary--text text-lg-h3"
-    >
-      Meteorites
-    </div>
     <div>
-      <v-container>
-        <meteorite-list></meteorite-list>
+      <v-container fluid>
+        <meteorite-list :category="categoryRoute"></meteorite-list>
       </v-container>
-
-      <!-- <meteorite-list-item :meteorite="meteorite"></meteorite-list-item> -->
-      <!-- <meteorite-list></meteorite-list> -->
     </div>
   </div>
 </template>
 
 <script>
-import MeteoriteList from "./MeteoriteList.vue";
+import { mapGetters } from "vuex";
 
+import MeteoriteList from "./MeteoriteList.vue";
 export default {
   components: { MeteoriteList },
-  data: () => ({}),
+  data() {
+    return {
+      category: undefined,
+    };
+  },
   methods: {
     onStorageUpdate(event) {
       if (event.key === "favoriteMeteorites") {
@@ -31,6 +28,7 @@ export default {
     },
   },
   mounted() {
+    this.category = "Meteorites";
     if (localStorage.favoriteMeteorites) {
       this.name = localStorage.favoriteMeteorites;
     }
@@ -42,6 +40,12 @@ export default {
   watch: {
     name(newName) {
       localStorage.favoriteMeteorites = newName;
+    },
+  },
+  computed: {
+    ...mapGetters(["favorites", "initialMeteorites", "meteoriteComparison"]),
+    categoryRoute: function() {
+      return this.$route.params;
     },
   },
 };

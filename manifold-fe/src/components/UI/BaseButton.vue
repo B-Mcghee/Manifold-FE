@@ -5,11 +5,10 @@
 </template>
 
 <script>
-import {VBtn} from 'vuetify-lib'
+import { VBtn } from "vuetify-lib";
 export default {
-    props:['size']
-    extends:VBtn
-}
+  props: ["size"]
+};
 </script>
 
 <style></style>

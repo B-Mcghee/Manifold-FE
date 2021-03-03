@@ -2,64 +2,35 @@
 // import Vuetify from 'vuetify';
 // import BaseCard from '@/components/UI/BaseCard.vue';
 // import MeteoriteList from '@/views/Meteorite/MeteoriteList.vue'
-
+// import Vuex from 'vuex';
+// import {__createMocks as createStoreMocks} from '@/store/mocks'
 
 // shallowMount(MeteoriteList, {
 //     stubs:['router-link', 'router-view']
 // })
-
+// jest.mock('@/store/mocks')
+// const localVue = createLocalVue();
+// localVue.use(Vuex);
 
 // describe('MeteoriteList.vue', () => {
+//     let vuetify;
 //     let wrapper;
-    
-//     beforeEach('should ', () => {
-//         const $store = {
-//             state:{
-//                 meteorites:[
-//                     {
-//                         name: "Aachen",
-//                         id: "1",
-//                         nametype: "Valid",
-//                         recclass: "L5",
-//                         mass: "21",
-//                         fall: "Fell",
-//                         year: "1880-01-01T00:00:00.000",
-//                         reclat: "50.775000",
-//                         reclong: "6.083330",
-//                         geolocation: {
-//                           type: "Point",
-//                           coordinates: [6.08333, 50.775],
-//                         }
-//                     }
-//                 ]
-//             },
-//             getters:{
-//                 initialMeteorites: (state) => state.meteorites,
-//             }
-//         }
 
-//         const localVue = createLocalVue()
-//         const vuetify = new Vuetify();
-//         localVue.use(vuetify)
-//         localVue.use(BaseCard);
-//         const shallowWrapper = shallowMount(MeteoriteList, {
-//             localVue, BaseCard
+//     beforeEach('should ', () => {
+//         storeMocks = createStoreMocks();
+
+//         vuetify = new Vuetify();
+
+//         wrapper = shallowMount(MeteoriteList, {
+//             store: storeMocks.store,
+//             localVue, vuetify
 //         });
-// console.log(shallowWrapper.html());
-//         const wrapper = mount(MeteoriteList, {
-//             mocks:{
-//                 $store,
-//                 BaseCard,
-//                 propsData:{
-//                     met
-//                 }
-//             }
-//         })
+//     })
 //         it('renders meteorites', () => {
 //             const localThis = {}
 //         })
-//         expect(wrapper).toMatchSnapshot()
+//         expect(wrapper.html()).toMatchSnapshot()
 //         console.log(wrapper.html());
 
 //     })
-// });
+
