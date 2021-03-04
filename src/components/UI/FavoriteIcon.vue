@@ -4,9 +4,10 @@
       <v-btn
         id="favorite-icon"
         width="100%"
-        @click.prevent="toggleFavorite"
+        @click.native="toggleFavorite"
         v-bind="attrs"
         v-on="on"
+        data-testid="button"
       >
         <svg
           id="Layer_1"
@@ -82,16 +83,7 @@ export default {
     name: "",
   }),
   methods: {
-    // toggleAnimation() {
-    //   this.starFill == "#fff"
-    //     ? (this.starFill = "#f9ff00")
-    //     : (this.starFill = "#fff");
-    //   this.backgroundFill == "#fff"
-    //     ? (this.backgroundFill = "#1b579e")
-    //     : (this.backgroundFill = "#fff");
-    // },
     toggleFavorite() {
-      console.log("crumbs");
       this.$emit("toggleFavorite");
     },
   },

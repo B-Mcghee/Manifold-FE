@@ -179,7 +179,6 @@ export default {
       variant: "fixed",
     };
   },
-  // components: { MeteoriteListItem },
   mounted() {
     this.onResize();
 
@@ -198,16 +197,7 @@ export default {
       return attrs;
     },
     numberOfPages() {
-      console.log(this.meteorites);
       return Math.ceil(this.meteorites.length / this.itemsPerPage);
-    },
-    overflowing: function() {
-      // const height = document.body.scrollHeight;
-      // console.log(height);
-      var viewPort = 0;
-
-      console.log(viewPort);
-      return `${viewPort}px`;
     },
   },
   methods: {
@@ -219,17 +209,6 @@ export default {
     },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
-    },
-    getheight() {
-      // const height = document.body.scrollHeight;
-      // console.log(height);
-
-      const totalHeight = window.innerHeight;
-      const heightToTop = this.$refs;
-      console.log(heightToTop);
-      this.height = totalHeight - (250 + 50);
-      console.log(this.height);
-      return this.height;
     },
     onResize() {
       this.isMobile = window.innerWidth < 600;
@@ -247,8 +226,7 @@ export default {
 .card {
   border: 3px solid red;
 }
-.list-container {
-}
+
 .overflow {
   height: 100vh;
   overflow-y: scroll;

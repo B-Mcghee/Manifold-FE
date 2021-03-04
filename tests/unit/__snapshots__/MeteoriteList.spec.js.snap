@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MeteoriteList.vue renders meteorite 1`] = `
+<div>
+  <div class="  d-flex justify-center text-h5  pb-4 font-weight-bold primary--text text-lg-h4">
+    <h1>Meteorites</h1>
+  </div>
+  <meteorite-loader-stub meteorites="[object Object]"></meteorite-loader-stub>
+</div>
+`;
+
+exports[`MeteoriteList.vue renders meteorites from state, and getters 1`] = `
+<div>
+  <div class="  d-flex justify-center text-h5  pb-4 font-weight-bold primary--text text-lg-h4">
+    <h1>Meteorites</h1>
+  </div>
+  <meteorite-loader-stub meteorites="[object Object]"></meteorite-loader-stub>
+</div>
+`;

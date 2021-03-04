@@ -133,7 +133,6 @@ export default {
     },
     toggleFavorite() {
       if (!this.favorites.includes(this.cleanId)) {
-        console.log(this.addToFavorites);
         this.addToFavorites(this.cleanId);
       } else {
         this.removeFavorite(this.cleanId);

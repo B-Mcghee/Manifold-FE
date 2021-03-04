@@ -1,13 +1,13 @@
 import {  createLocalVue, shallowMount, mount } from '@vue/test-utils';
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import FavoriteIcon from '@/components/UI/FavoriteIcon.vue'
+import CompareIcon from '@/components/UI/CompareIcon.vue'
 
 
 
 
 
-describe('FavoriteIcon', () => {
+describe('CompareIcon', () => {
   const localVue = createLocalVue();
   let vuetify;
 
@@ -16,7 +16,7 @@ describe('FavoriteIcon', () => {
 
   })
   test('renders item', () =>{
-    const wrapper = mount(FavoriteIcon,{
+    const wrapper = mount(CompareIcon,{
       localVue,
       vuetify, 
       propsData:{
@@ -28,7 +28,7 @@ describe('FavoriteIcon', () => {
   })
 
   test('button is firing and emitting event', () => {
-    const wrapper = mount(FavoriteIcon, {
+    const wrapper = mount(CompareIcon, {
       localVue,
       vuetify, 
       propsData:{
@@ -42,11 +42,14 @@ describe('FavoriteIcon', () => {
     const event = jest.fn();
     const button = wrapper.find('.v-btn');
 
-    wrapper.vm.$on('toggleFavorite', event)
+    wrapper.vm.$on('compareMeteorite', event)
 
     expect(event).toHaveBeenCalledTimes(0)
     button.trigger('click')
 
     expect(event).toHaveBeenCalledTimes(1)
   })
+
+
+
 })

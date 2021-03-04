@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MeteoriteList.vue rending component 1`] = `
+<div class="relative">
+  <div>
+    <v-container-stub tag="div" fluid="true">
+      <meteorite-list-stub category="[object Object]"></meteorite-list-stub>
+    </v-container-stub>
+  </div>
+</div>
+`;

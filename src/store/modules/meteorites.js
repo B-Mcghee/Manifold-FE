@@ -4,7 +4,6 @@ const baseUrl = `https://data.nasa.gov/resource/y77d-th95.json?`;
 
 const state = {
   meteorites: [],
-  displayedMeteorites: [],
   searchTypes: ["name", "id", "recclass", "mass"],
   favoriteMeteorites: [],
   meteoriteComparison: [],
@@ -46,7 +45,6 @@ const actions = {
     if (i.page == 1) {
       offset = 0;
     }
-    console.log(offset);
     const response = await axios.get(
       baseUrl + `$limit=${i.filter}&$offset=${offset}`
     );

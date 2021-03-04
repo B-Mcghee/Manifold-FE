@@ -13,7 +13,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import MeteoriteLoader from "../../components/MeteoriteLoader.vue";
+import MeteoriteLoader from "@/components/MeteoriteLoader.vue";
 export default {
   props: {
     category: {
@@ -57,12 +57,12 @@ export default {
       value === "year"
         ? this.alteredTitle(`${this.category.value.substring(0, 4)} /`)
         : this.alteredTitle(`${this.category.value} /`);
-      // this.alteredTitle(`${this.category.value} /`);
-      console.log(this.category.value);
-      return this.$store.getters.initialMeteorites.filter(
+
+      const array = this.initialMeteorites.filter(
         (meteorite) =>
           meteorite[`${this.category.property}`] == this.category.value
       );
+      return array;
     },
     alteredTitle(value) {
       this.title = value + " Meteorites";
