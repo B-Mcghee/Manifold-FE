@@ -1,13 +1,13 @@
 # Manifold Front End Project
 
 ## *Description*
-```
+
 This project is the MVP of creating a user interface displaying from an API. The dataset is NASA meteorite Earth landings and was to be displayed in a organized manner, along with saving data across browser sessions. I chose the current technology ecosystem based on familiarity with Vue JS and Axios. I chose Vuetify, Jest, Docker based upon only knowing them by name and never working with 
-```
+
 ## *Future Deliverables*
-```
+
 Currently this FE is the MVP, and in the future would like implement google maps or and svg to show locations of longitude and latitude where the meteorites landed on the map. I would implement graphs with D3Js to display the visual representation of the data and  I would also include more unit test to try and cover the entire spectrum of the actual project.
-```
+
 
 ## *Ecosystem*
 ```
@@ -48,9 +48,11 @@ npm run build
 
 ### *Run your unit tests*
 ```
-npm run test and npm run debug are how to run the testing framework. You will need Node version 8.4+ in order to run the  debugger.
-If wanting to create more test, the setup file has to be in unit folder as well as the files need to have an extension of .spec.js/.js in order to be initiated.
+npm run test and npm run debug 
 ```
+to run the testing framework. You will need Node version 8.4+ in order to run the  debugger.
+If wanting to create more test, the setup file has to be in unit folder as well as the files need to have an extension of .spec.js/.js in order to be initiated.
+
 
 
 ### *Lints and fixes files*
