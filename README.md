@@ -17,18 +17,18 @@ Currently this FE is the MVP, and in the future would like implement google maps
 - Docker for containers
 - Axios for fetching the API
 ```
-## Prerequisites
+## *Prerequisites*
 
 ```
 In order to run this container you'll need docker installed on your PC
 ```
-## Getting Started
+## *Getting Started*
 
 ```
 go to the dockerFile and next to *WORKDIR* enter the path/to/the/Dockerfile
 
 ```
-## Project setup
+## *Project setup*
 ```
 npm install
 docker build -t manifold-fe .
@@ -36,24 +36,24 @@ docker run -p 8000:80 -it --name nasa-dataset manifold-fe
 your project will be running on port 8000
 ```
 
-### Compiles and hot-reloads for development
+### *Compiles and hot-reloads for development*
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### *Compiles and minifies for production*
 ```
 npm run build
 ```
 
-### Run your unit tests
+### *Run your unit tests*
 ```
 npm run test and npm run debug are how to run the testing framework. You will need Node version 8.4+ in order to run the  debugger.
 If wanting to create more test, the setup file has to be in unit folder as well as the files need to have an extension of .spec.js/.js in order to be initiated.
 ```
 
 
-### Lints and fixes files
+### *Lints and fixes files*
 ```
 npm run lint
 ```
