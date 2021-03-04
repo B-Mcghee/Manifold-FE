@@ -67,8 +67,8 @@
                 name: 'Property',
                 params: {
                   property: 'recclass',
-                  value: meteorite.recclass,
-                },
+                  value: meteorite.recclass
+                }
               }"
             >
               Reclass: {{ meteorite.recclass }}
@@ -84,7 +84,7 @@
               class="text-subtitle-1 darkPrimary--text"
               :to="{
                 name: 'Property',
-                params: { property: 'year', value: meteorite.year },
+                params: { property: 'year', value: meteorite.year }
               }"
             >
               year:{{ meteorite.year | formatDate }}</v-btn
@@ -119,14 +119,14 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   components: { FavoriteIcon, CompareIcon, BaseCard },
   props: {
-    meteorite: Object,
+    meteorite: Object
   },
   methods: {
     ...mapActions([
       "addToFavorites",
       "removeFavorite",
       "addComparison",
-      "removeComparison",
+      "removeComparison"
     ]),
     checkFavorite(value) {
       return value === JSON.parse(this.meteorite.id);
@@ -144,7 +144,7 @@ export default {
       } else {
         this.removeComparison(this.cleanId);
       }
-    },
+    }
   },
 
   filters: {
@@ -171,7 +171,7 @@ export default {
           return geolocation.type + " [" + geolocation.coordinates + "]";
         }
       }
-    },
+    }
   },
   computed: {
     ...mapGetters(["favorites", "initialMeteorites", "meteoriteComparison"]),
@@ -185,8 +185,8 @@ export default {
     },
     cleanId: function() {
       return JSON.parse(this.meteorite.id);
-    },
-  },
+    }
+  }
 };
 </script>
 

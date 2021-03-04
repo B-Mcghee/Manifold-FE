@@ -16,7 +16,7 @@ export default {
   components: { MeteoriteList },
   data() {
     return {
-      category: undefined,
+      category: undefined
     };
   },
   methods: {
@@ -25,7 +25,7 @@ export default {
         this.$store.dispatch("syncFavorites", event.newValue);
         this.name = event.newValue;
       }
-    },
+    }
   },
   mounted() {
     this.category = "Meteorites";
@@ -40,14 +40,14 @@ export default {
   watch: {
     name(newName) {
       localStorage.favoriteMeteorites = newName;
-    },
+    }
   },
   computed: {
     ...mapGetters(["favorites", "initialMeteorites", "meteoriteComparison"]),
     categoryRoute: function() {
       return this.$route.params;
-    },
-  },
+    }
+  }
 };
 </script>
 

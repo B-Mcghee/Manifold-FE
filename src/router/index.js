@@ -1,11 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-
 Vue.use(VueRouter);
 
 const routes = [
-
   {
     path: "/meteorites",
     name: "Meteorite",
@@ -13,8 +11,7 @@ const routes = [
       import(
         /* webpackChunkName: "Meteorite" */ "../views/Meteorite/Meteorite.vue"
       ),
-      alias:'/'
-
+    alias: "/"
   },
   {
     path: "/meteorites/category/:category",
@@ -27,11 +24,8 @@ const routes = [
     name: "Property",
     component: () => import("@/views/Meteorite/Meteorite.vue")
   },
-  { path: '/404', component: () => import("@/views/Error")
-},  
-  { path: '*', redirect: '/404' },  
-
-
+  { path: "/404", component: () => import("@/views/Error") },
+  { path: "*", redirect: "/404" }
 ];
 
 const router = new VueRouter({

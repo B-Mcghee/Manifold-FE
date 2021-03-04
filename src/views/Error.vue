@@ -29,14 +29,14 @@
 export default {
   data() {
     return {
-      dialog: true,
+      dialog: true
     };
   },
   methods: {
     goBack() {
       this.dialog = false;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -17,14 +17,14 @@ import MeteoriteLoader from "@/components/MeteoriteLoader.vue";
 export default {
   props: {
     category: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   components: { MeteoriteLoader },
   data() {
     return {
       year: false,
-      title: "Meteorites",
+      title: "Meteorites"
     };
   },
   methods: {
@@ -33,8 +33,8 @@ export default {
     },
     favoriteList() {
       const array = [];
-      this.favorites.forEach((m) => {
-        this.initialMeteorites.filter((meteorite) => {
+      this.favorites.forEach(m => {
+        this.initialMeteorites.filter(meteorite => {
           if (m == meteorite.id) {
             array.push(meteorite);
           }
@@ -44,8 +44,8 @@ export default {
     },
     comparisonList() {
       const array = [];
-      this.meteoriteComparison.forEach((m) => {
-        this.initialMeteorites.filter((meteorite) => {
+      this.meteoriteComparison.forEach(m => {
+        this.initialMeteorites.filter(meteorite => {
           if (m == meteorite.id) {
             array.push(meteorite);
           }
@@ -59,14 +59,14 @@ export default {
         : this.alteredTitle(`${this.category.value} /`);
 
       const array = this.initialMeteorites.filter(
-        (meteorite) =>
+        meteorite =>
           meteorite[`${this.category.property}`] == this.category.value
       );
       return array;
     },
     alteredTitle(value) {
       this.title = value + " Meteorites";
-    },
+    }
   },
 
   computed: {
@@ -88,9 +88,9 @@ export default {
       }
       this.alteredTitle("All");
       return this.allMeteorites();
-    },
+    }
   },
-  filters: {},
+  filters: {}
 };
 </script>
 

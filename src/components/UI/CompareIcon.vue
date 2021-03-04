@@ -63,19 +63,19 @@ export default {
   props: {
     compare: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data: () => ({
     height: "2em",
     width: "2em",
-    stroke: 2,
+    stroke: 2
   }),
   methods: {
     compareMeteorite() {
       this.$emit("compareMeteorite");
-    },
-  },
+    }
+  }
 };
 </script>
 

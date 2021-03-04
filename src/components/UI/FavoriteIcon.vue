@@ -70,8 +70,8 @@ export default {
   props: {
     favorite: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data: () => ({
     height: "2em",
@@ -80,12 +80,12 @@ export default {
     backgroundFill: "#fff",
     favoriteIds: [],
     selected: false,
-    name: "",
+    name: ""
   }),
   methods: {
     toggleFavorite() {
       this.$emit("toggleFavorite");
-    },
+    }
   },
 
   computed: {
@@ -96,8 +96,8 @@ export default {
     bookmark() {
       const fill = this.backgroundFill;
       return fill;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,52 +1,43 @@
-import {  createLocalVue, shallowMount, mount } from '@vue/test-utils';
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import FavoriteIcon from '@/components/UI/FavoriteIcon.vue'
+import { createLocalVue, mount } from "@vue/test-utils";
+import Vuetify from "vuetify";
+import FavoriteIcon from "@/components/UI/FavoriteIcon.vue";
 
-
-
-
-
-describe('FavoriteIcon', () => {
+describe("FavoriteIcon", () => {
   const localVue = createLocalVue();
   let vuetify;
 
   beforeEach(() => {
     vuetify = new Vuetify();
-
-  })
-  test('renders item', () =>{
-    const wrapper = mount(FavoriteIcon,{
-      localVue,
-      vuetify, 
-      propsData:{
-        favorite:true
-      }
-    })
-    expect(wrapper.html()).toMatchSnapshot();
-
-  })
-
-  test('button is firing and emitting event', () => {
+  });
+  test("renders item", () => {
     const wrapper = mount(FavoriteIcon, {
       localVue,
-      vuetify, 
-      propsData:{
-        favorite:true
-      },
+      vuetify,
+      propsData: {
+        favorite: true
+      }
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 
-
-    })
-    expect(wrapper.find('.v-btn').exists()).toBe(true);
+  test("button is firing and emitting event", () => {
+    const wrapper = mount(FavoriteIcon, {
+      localVue,
+      vuetify,
+      propsData: {
+        favorite: true
+      }
+    });
+    expect(wrapper.find(".v-btn").exists()).toBe(true);
 
     const event = jest.fn();
-    const button = wrapper.find('.v-btn');
+    const button = wrapper.find(".v-btn");
 
-    wrapper.vm.$on('toggleFavorite', event)
+    wrapper.vm.$on("toggleFavorite", event);
 
-    expect(event).toHaveBeenCalledTimes(0)
-    button.trigger('click')
+    expect(event).toHaveBeenCalledTimes(0);
+    button.trigger("click");
 
-    expect(event).toHaveBeenCalledTimes(1)
-  })
-})
+    expect(event).toHaveBeenCalledTimes(1);
+  });
+});

@@ -55,20 +55,20 @@ export default {
       {
         name: "Meteorite",
         icon: "mdi-meteor",
-        tabName: "Meteorites",
+        tabName: "Meteorites"
       },
       {
         name: "Category",
         icon: "mdi-star-shooting-outline",
-        tabName: "Favorites",
+        tabName: "Favorites"
       },
       {
         name: "Category",
         icon: "mdi-scale-balance",
-        tabName: "Compare",
-      },
+        tabName: "Compare"
+      }
     ],
-    isMobile: false,
+    isMobile: false
   }),
 
   beforeDestroy() {
@@ -86,7 +86,7 @@ export default {
   methods: {
     onResize() {
       this.isMobile = window.innerWidth < 600;
-    },
-  },
+    }
+  }
 };
 </script>

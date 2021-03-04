@@ -155,8 +155,8 @@ export default {
   components: { Closed },
   props: {
     meteorites: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   data() {
     return {
@@ -176,7 +176,7 @@ export default {
       height: undefined,
       isMobile: false,
       padless: false,
-      variant: "fixed",
+      variant: "fixed"
     };
   },
   mounted() {
@@ -198,7 +198,7 @@ export default {
     },
     numberOfPages() {
       return Math.ceil(this.meteorites.length / this.itemsPerPage);
-    },
+    }
   },
   methods: {
     nextPage() {
@@ -212,13 +212,13 @@ export default {
     },
     onResize() {
       this.isMobile = window.innerWidth < 600;
-    },
+    }
   },
   beforeDestroy() {
     if (typeof window === "undefined") return;
 
     window.removeEventListener("resize", this.onResize, { passive: true });
-  },
+  }
 };
 </script>
 

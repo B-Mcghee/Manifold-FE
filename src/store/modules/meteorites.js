@@ -7,8 +7,7 @@ const state = {
   searchTypes: ["name", "id", "recclass", "mass"],
   favoriteMeteorites: [],
   meteoriteComparison: [],
-  favoriteIds:[]
-  
+  favoriteIds: []
 };
 const mutations = {
   FETCH_METEORITES(state, meteorites) {
