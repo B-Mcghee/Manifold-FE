@@ -27,12 +27,14 @@ In order to run this container you'll need docker installed on your PC
 ```
 go to the dockerFile and next to *WORKDIR* enter the path/to/the/Dockerfile
 
+as well as step 2 enter the path/to/the/project/dist
+
 ```
 ## *Project setup*
 ```
 npm install
 docker build -t manifold-fe .
-docker run -p 8000:80 -it --name nasa-dataset manifold-fe
+docker run -p 8000:80 -it --name manifold-fe manifold-fe
 your project will be running on port 8000
 ```
 

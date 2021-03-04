@@ -1,7 +1,5 @@
-FROM node:lts-alpine
+FROM node:12.18.1-alpine AS build
 
-# install simple http server for serving static content
-RUN npm install -g http-server
 
 # make the 'app' folder the current working directory
 WORKDIR /path/to/the/Dockerfile
@@ -18,5 +16,10 @@ COPY . .
 # build app for production with minification
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+FROM nginx:1.19.0-alpine AS prod-stage
+
+COPY --from=build path/to/the/project/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
